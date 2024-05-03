@@ -76,7 +76,7 @@ TXDATA_T *txdata;                       // Pointer to uncached Tx data buffer
 TXDATA_T tx_buffer[TX_BUFF_LEN(CHAN_MAXLEDS)]={0};  // Tx buffer for assembling data
 
 //this is only needed for alpha bending
-union color_t color_buffer[LED_NCHANS][CHAN_MAXLEDS];
+color_t color_buffer[LED_NCHANS][CHAN_MAXLEDS];
 
 
 // Map GPIO, DMA and SMI registers into virtual mem (user space)
@@ -205,7 +205,7 @@ bool leds_init(int init_led_count) {
 
 
 //set rgb values for a specific channel and pixel
-void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  union color_t color)
+void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  color_t color)
 {
 
 //    printf("smileds: set pixel %d %d %d\n", channel, pixel, rgb);
@@ -218,17 +218,17 @@ void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  union color_t color)
         return;
 
     //need to do alpha blending with previous value?
-    if (color.component.a==255)
+    if (color.a==255)
     {
         //no blending, just store (in case there will be another pixel that will be blended on top of this one)
         color_buffer[channel][pixel]=color;
     }
     else
     {
-        const uint8_t old_a=1-color.component.a;
-        color.component.r=color_buffer[channel][pixel].component.r*old_a/255 + color.component.r*color.component.a/255;
-        color.component.g=color_buffer[channel][pixel].component.g*old_a/255 + color.component.g*color.component.a/255;
-        color.component.b=color_buffer[channel][pixel].component.b*old_a/255 + color.component.b*color.component.a/255;
+        const uint8_t old_a=1-color.a;
+        color.r=color_buffer[channel][pixel].r*old_a/255 + color.r*color.a/255;
+        color.g=color_buffer[channel][pixel].g*old_a/255 + color.g*color.a/255;
+        color.b=color_buffer[channel][pixel].b*old_a/255 + color.b*color.a/255;
         color_buffer[channel][pixel]=color;
     }
 
@@ -242,7 +242,7 @@ void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  union color_t color)
 
         // tx_offset[0] always 0xffff
         // tx_offset[1] is the actual bit
-        if (color.packed & rgb_mask)
+        if ((int)color.b & rgb_mask)
             tx_offset[1]|= channel_on_mask;
         else
             tx_offset[1]&= channel_off_mask;
