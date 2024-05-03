@@ -4,7 +4,7 @@
 
 #include "rpi_pixleds_lib.h"
 
-#define NUM_LEDS 8
+#define NUM_LEDS 144
 #define NUM_STRIPS 8
 
 int main(int argc, char *argv[])
@@ -15,13 +15,14 @@ int main(int argc, char *argv[])
     ret = leds_init(NUM_LEDS);
 
     leds_clear();
+    leds_send();
     for(int row = 0; ; row++)
     {
         int *ptr = buffer;
         for(int strip = 0; strip < NUM_STRIPS; strip++)
         {
             for(int leds = 0; leds < NUM_LEDS; leds++)
-                *(ptr++) = ((row % 255) << 16) | (row % 255);
+                *(ptr++) = ((row % 64) << 16) | (row % 64);
         }
         leds_set(buffer);
         leds_send();

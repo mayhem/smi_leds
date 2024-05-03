@@ -282,17 +282,11 @@ void rgb_txdata(int *rgbs, TXDATA_T *txd)
 //clear all leds on all channels in an efficient way
 void leds_clear()
 {
-    TXDATA_T *tx_offset=&tx_buffer[LED_TX_OSET(0)];
+    int row[LED_NCHANS  * led_count];
 
-    for (uint32_t b=0; b<led_count*LED_NBITS; b++)
-    {
-        // tx_offset[0] always 0xffff
-        tx_offset[1]=0x00;
-        // tx_offset[2] always 0x0000
-        tx_offset += BIT_NPULSES;
-    }
-    memset(color_buffer,0,sizeof(color_buffer));
-
+    memset(row, 0, LED_NCHANS  * led_count * sizeof(int));
+    for (int n=0; n<led_count; n++)
+        rgb_txdata(row, &tx_buffer[LED_TX_OSET(n)]);
 }
 
 void leds_send() 
@@ -305,45 +299,11 @@ void leds_send()
     start_smi(&vc_mem);
 }
 
-void get_buffer(int *buffer, int row)
-{
-    for(int j = 0, *ptr = buffer; j < 8; j++)
-//        *(ptr++) = 0xFF00FF;
-        *(ptr++) = ((row % 255) << 16) | (row % 255);
-}
-
 void leds_set(int *buffer)
 {
-    int row[LED_NCHANS];
-    static int row_index = 0;
-
     for (int n=0; n<led_count; n++)
     {
-//        get_buffer(row, row_index);
         rgb_txdata(buffer, &tx_buffer[LED_TX_OSET(n)]);
         buffer += LED_NCHANS;
     }
-    row_index++;
 }
-
-#if 0
-
-void test()
-{
-   const int leds=8;
-
-   leds_init(leds);
-   leds_clear();
-   while(1)
-   {
-       leds_set();
-       leds_send();
-       usleep(1000000);
-   }
-}
-
-void main(void)
-{
-    test();
-}
-#endif
