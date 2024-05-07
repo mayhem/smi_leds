@@ -11,6 +11,12 @@ PyMethodDef smi_leds_funcs[] =
 		smi_leds_docs
     },
 	{
+        "leds_brightness",
+		(PyCFunction)smi_leds_leds_brightness,
+		METH_VARARGS,
+		smi_leds_docs
+    },
+	{
         "leds_clear",
 		(PyCFunction)smi_leds_leds_clear,
 		METH_NOARGS,

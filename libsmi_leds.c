@@ -7,12 +7,25 @@
 PyObject *smi_leds_leds_init(PyObject *self, PyObject *args)
 {
     int num_leds;
+    int brightness;
     bool ret;
 
-    if (!PyArg_ParseTuple(args, "i", &num_leds))
+    if (!PyArg_ParseTuple(args, "ii", &num_leds, &brightness))
         return NULL;
-    ret = leds_init(num_leds);
+
+    ret = leds_init(num_leds, brightness);
     return PyBool_FromLong(ret);
+}
+
+PyObject *smi_leds_leds_brightness(PyObject *self, PyObject *args)
+{
+    int brightness;
+
+    if (!PyArg_ParseTuple(args, "i", &brightness))
+        return NULL;
+
+    leds_brightness(brightness);
+    Py_RETURN_NONE;   
 }
 
 PyObject *smi_leds_leds_clear(PyObject *self, PyObject *args)
