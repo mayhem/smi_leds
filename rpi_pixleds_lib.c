@@ -297,6 +297,7 @@ void leds_send()
     //NOTE: due to caching its more efficient to use a memcpy instead of direct buffer manipulation.
     memcpy(txdata, tx_buffer, TX_BUFF_SIZE(led_count));
     start_smi(&vc_mem);
+    usleep(2850);
 }
 
 void leds_set(color_t *buffer)
