@@ -294,6 +294,7 @@ void leds_clear()
     memset(row, 0, LED_NCHANS  * led_count * sizeof(int));
     for (int n=0; n<led_count; n++)
         rgb_txdata(row, &tx_buffer[LED_TX_OSET(n)]);
+    leds_send();
 }
 
 void leds_send() 
