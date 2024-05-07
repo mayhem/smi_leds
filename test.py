@@ -33,7 +33,6 @@ while True:
 
     smi_leds.leds_set(leds)
     smi_leds.leds_send()
-    sleep(.0035)
     row += 1
 
 sleep(1)

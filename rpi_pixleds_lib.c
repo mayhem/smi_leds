@@ -315,8 +315,8 @@ void leds_set(color_t *buffer)
     TXDATA_T *txd;
 
     // Scale the input buffer according to brightness
-//    for(src = (uint8_t *)buffer, dest = (uint8_t *)scaled_buf, i = 0; i < (int)scaled_size; src++, dest++, i++)
-//        *dest  = (int)*src * (int)brightness / 100;
+    for(src = (uint8_t *)buffer, dest = (uint8_t *)scaled_buf, i = 0; i < (int)scaled_size; src++, dest++, i++)
+        *dest  = (int)*src * (int)brightness / 100;
    
     for(led = 0; led < led_count; led++)
     {
@@ -334,7 +334,7 @@ void leds_set(color_t *buffer)
             txd[1] = txd[2] = 0;
             for (i=0; i<LED_NCHANS; i++)
             {
-                if (((int *)buffer)[led_count * i + led] & msk)
+                if (scaled_buf[led_count * i + led] & msk)
                     txd[1] |= (1 << i);
             }
             txd += BIT_NPULSES;
