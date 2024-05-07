@@ -311,7 +311,8 @@ void leds_set(color_t *buffer)
         for (n=0; n<LED_NBITS; n++)
         {
             // Mask to convert RGB to GRB, M.S bit first
-            msk = n==0 ? 0x8000 : n==8 ? 0x800000 : n==16 ? 0x80 : msk>>1;
+            msk = n==0 ? 0x8000 : n==8 ? 0x800000  : n==16 ? 0x80: msk>>1;
+//            msk = n==0 ? 0x8000 : n==8 ? 0x80: n==16 ? 0x800000  : msk>>1;
 
             // 1st byte or word is a high pulse on all lines
             txd[0] = (TXDATA_T)0xffff;
