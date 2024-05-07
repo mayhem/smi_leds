@@ -139,7 +139,7 @@ void disp_mode_vals(uint32_t mode)
 // Catastrophic failure in initial setup
 void fail(char *s)
 {
-    printf(s);
+    printf("%s\n", s);
 }
 
 // Open mailbox interface, return file descriptor

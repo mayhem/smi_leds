@@ -299,11 +299,31 @@ void leds_send()
     start_smi(&vc_mem);
 }
 
-void leds_set(int *buffer)
+void leds_set(color_t *buffer)
 {
-    for (int n=0; n<led_count; n++)
+    int i, n, msk, led, strip, *buf = (int *)buffer;
+    TXDATA_T *txd;
+   
+    for(led = 0; led < led_count; led++)
     {
-        rgb_txdata(buffer, &tx_buffer[LED_TX_OSET(n)]);
-        buffer += LED_NCHANS;
+        txd = &tx_buffer[LED_TX_OSET(led)];
+        // For each bit of the 24-bit RGB values..
+        for (n=0; n<LED_NBITS; n++)
+        {
+            // Mask to convert RGB to GRB, M.S bit first
+            msk = n==0 ? 0x8000 : n==8 ? 0x800000 : n==16 ? 0x80 : msk>>1;
+
+            // 1st byte or word is a high pulse on all lines
+            txd[0] = (TXDATA_T)0xffff;
+            // 2nd has high or low bits from data
+            // 3rd is a low pulse
+            txd[1] = txd[2] = 0;
+            for (i=0; i<LED_NCHANS; i++)
+            {
+                if (buf[led_count * i + led] & msk)
+                    txd[1] |= (1 << i);
+            }
+            txd += BIT_NPULSES;
+        }
     }
 }

@@ -19,10 +19,10 @@ extern "C"
 
 
 bool leds_init(int init_led_count);
-void leds_set_pixel(uint8_t  channel, uint16_t  pixel, color_t color);
-void leds_send();
-void leds_set(int *buffer);
 void leds_clear();
+void leds_set_pixel(uint8_t  channel, uint16_t  pixel, color_t color);
+void leds_set(color_t *data);
+void leds_send();
 
 #ifdef __cplusplus
 }
