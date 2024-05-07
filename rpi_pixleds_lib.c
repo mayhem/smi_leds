@@ -72,6 +72,7 @@ volatile SMI_DCD_REG *smi_dcd;
 
 
 uint16_t  led_count=0;                  //used number of leds
+uint8_t   brightness=25;                // brightness from 0 - 100
 TXDATA_T *txdata;                       // Pointer to uncached Tx data buffer
 TXDATA_T tx_buffer[TX_BUFF_LEN(CHAN_MAXLEDS)]={0};  // Tx buffer for assembling data
 
@@ -166,14 +167,16 @@ void swap_bytes(void *data, int len) {
     }
 }
 
-
-bool leds_init(int init_led_count) {
+// brightness is from 0 - 100
+bool leds_init(int init_led_count, uint8_t brightness_arg) 
+{
     if (init_led_count > CHAN_MAXLEDS)
     {
         printf("smileds: Error! Max %d leds supported!\n", CHAN_MAXLEDS);
         return false;
     }
     led_count=init_led_count;
+    brightness=brightness_arg;
 
     map_devices();
     init_smi(LED_NCHANS > 8 ? SMI_16_BITS : SMI_8_BITS, SMI_TIMING);
@@ -203,6 +206,10 @@ bool leds_init(int init_led_count) {
     return true;
 }
 
+void leds_brightness(uint8_t brightness_arg)
+{
+    brightness=brightness_arg;
+}
 
 //set rgb values for a specific channel and pixel
 void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  color_t color)
@@ -302,8 +309,14 @@ void leds_send()
 
 void leds_set(color_t *buffer)
 {
-    int i, n, msk, led, strip, *buf = (int *)buffer;
+    int i, n, msk, led, strip, scaled_buf[led_count * LED_NCHANS];
+    int scaled_size = (int)led_count * (int)LED_NCHANS * sizeof(int);
+    uint8_t *src, *dest;
     TXDATA_T *txd;
+
+    // Scale the input buffer according to brightness
+    for(src = (uint8_t *)buffer, dest = (uint8_t *)scaled_buf, i = 0; i < (int)scaled_size; src++, dest++, i++)
+        *dest  = (int)*src * (int)brightness / 100;
    
     for(led = 0; led < led_count; led++)
     {
@@ -313,7 +326,6 @@ void leds_set(color_t *buffer)
         {
             // Mask to convert RGB to GRB, M.S bit first
             msk = n==0 ? 0x8000 : n==8 ? 0x800000  : n==16 ? 0x80: msk>>1;
-//            msk = n==0 ? 0x8000 : n==8 ? 0x80: n==16 ? 0x800000  : msk>>1;
 
             // 1st byte or word is a high pulse on all lines
             txd[0] = (TXDATA_T)0xffff;
@@ -322,7 +334,7 @@ void leds_set(color_t *buffer)
             txd[1] = txd[2] = 0;
             for (i=0; i<LED_NCHANS; i++)
             {
-                if (buf[led_count * i + led] & msk)
+                if (scaled_buf[led_count * i + led] & msk)
                     txd[1] |= (1 << i);
             }
             txd += BIT_NPULSES;
