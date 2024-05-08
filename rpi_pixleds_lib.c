@@ -308,17 +308,22 @@ void leds_send()
     usleep(2850);
 }
 
-void leds_set(color_t *buffer)
+void leds_set(uint8_t *buffer)
 {
     int i, n, msk, led, strip, scaled_buf[led_count * LED_NCHANS];
-    int scaled_size = (int)led_count * (int)LED_NCHANS * sizeof(int);
-    uint8_t *src, *dest;
+    int scaled_size = (int)led_count * (int)LED_NCHANS, *dest;
+    uint8_t *src, *ptr;
     TXDATA_T *txd;
 
     // Scale the input buffer according to brightness
-    for(src = (uint8_t *)buffer, dest = (uint8_t *)scaled_buf, i = 0; i < (int)scaled_size; src++, dest++, i++)
-        *dest  = (int)*src * (int)brightness / 100;
-   
+    for(src = buffer, dest = scaled_buf, i = 0; i < scaled_size; dest++, i++)
+    {
+        ptr = (uint8_t *)dest;
+        *(ptr + 2) = (int)*(src++) * (int)brightness / 100;
+        *(ptr + 1) = (int)*(src++) * (int)brightness / 100;
+        *(ptr + 0) = (int)*(src++) * (int)brightness / 100;
+    }
+
     for(led = 0; led < led_count; led++)
     {
         txd = &tx_buffer[LED_TX_OSET(led)];

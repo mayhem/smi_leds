@@ -10,10 +10,9 @@
 
 int main(int argc, char *argv[])
 {
-    bool  ret;
-    int   buffer[NUM_LEDS * NUM_STRIPS];
+    bool    ret;
+    uint8_t buffer[NUM_LEDS * NUM_STRIPS * 3];
 
-    printf("buf: %d\n", sizeof(buffer));
 
     ret = leds_init(NUM_LEDS, 25);
     leds_clear();
@@ -21,17 +20,21 @@ int main(int argc, char *argv[])
 
     for(int row = 0;; row++)
     {
-        memset(buffer, 0, sizeof(int) * NUM_LEDS * NUM_STRIPS);
+//        memset(buffer, 0, sizeof(buffer));
+        uint8_t *ptr = buffer;
         for(int led = 0; led < NUM_LEDS; led++)
         {
             for(int strip = 0; strip < NUM_STRIPS; strip++)
             {
-                int *ptr = &buffer[strip * NUM_LEDS + led];
-                *(ptr++) = 0xFFFFFF;
+                *(ptr++) = 0x00;
+                *(ptr++) = 0x00;
+                *(ptr++) = 0xFF;
             }
         }
-        printf("row: %d\n", row);
-        leds_set((color_t *)buffer);
+//        for(int o = 0; o < 24; o++)
+//            printf("%02X ", buffer[o]);
+//        printf("\n");
+        leds_set(buffer);
         leds_brightness(row % 101);
         leds_send();
         usleep(10000);
