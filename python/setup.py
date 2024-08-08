@@ -3,7 +3,7 @@
 import os
 import sys
 from setuptools import setup, Extension
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError
 
 def get_compile_flags():
     try:
@@ -27,8 +27,6 @@ def get_compile_flags():
 
     print("Building smi_leds extension for %d channels" % nchans)
     compile_flags.append("-DNCHANS=%d" % nchans)
-
-    print(compile_flags)
 
     return compile_flags
 
