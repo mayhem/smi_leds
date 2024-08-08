@@ -3,7 +3,7 @@
 #include<string.h>
 #include<unistd.h>
 
-#include "rpi_pixleds_lib.h"
+#include "smi_leds.h"
 
 #define NUM_LEDS 10
 #define NUM_STRIPS 8

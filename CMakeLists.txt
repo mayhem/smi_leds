@@ -21,11 +21,10 @@ add_library(smi_leds STATIC smi_led/rpi_dma_utils.c
                             smi_led/rpi_dma_utils.h
                             smi_led/rpi_pixleds.c
                             smi_led/rpi_pixleds_lib.c
-                            include/rpi_pixleds_lib.h
+                            include/smi_leds.h
                             smi_led/rpi_smi_defs.h)
+set_target_properties(smi_leds PROPERTIES PUBLIC_HEADER "include/smi_leds.h")
 target_compile_options(smi_leds PRIVATE ${LED_NCHANS})
-
-#target_link_libraries(rpi_smi_leds PUBLIC smi-leds)
 
 set( BINARY smi_test )
 add_executable( ${BINARY}
@@ -34,3 +33,8 @@ add_executable( ${BINARY}
 target_link_libraries( ${BINARY}
                        PRIVATE
                        smi_leds )
+
+install(TARGETS smi_leds 
+        LIBRARY DESTINATION /usr/local/lib/smi_leds
+        PUBLIC_HEADER DESTINATION /usr/local/include
+)

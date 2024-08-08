@@ -14,7 +14,7 @@
 #include <ctype.h>
 #include <stdbool.h>
 
-#include "rpi_pixleds_lib.h"
+#include "smi_leds.h"
 #include "rpi_dma_utils.h"
 #include "rpi_smi_defs.h"
 
