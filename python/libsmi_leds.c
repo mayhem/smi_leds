@@ -41,7 +41,7 @@ PyObject *smi_leds_leds_set(PyObject *self, PyObject *args)
     if (!PyArg_ParseTuple(args, "y*", &buffer))
         return NULL;
 
-    leds_set((color_t *)buffer.buf);
+    leds_set((uint8_t *)buffer.buf);
     PyBuffer_Release(&buffer);
 
     Py_RETURN_NONE;   

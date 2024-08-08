@@ -310,7 +310,7 @@ void leds_send()
 
 void leds_set(uint8_t *buffer)
 {
-    int i, n, msk, led, strip, scaled_buf[led_count * LED_NCHANS];
+    int i, n, msk, led, scaled_buf[led_count * LED_NCHANS];
     int scaled_size = (int)led_count * (int)LED_NCHANS, *dest;
     uint8_t *src, *ptr;
     TXDATA_T *txd;
