@@ -33,7 +33,11 @@ def get_compile_flags():
 
     return compile_flags
 
-compile_flags = get_compile_flags()
+if sys.argv[1] == "sdist":
+    compile_flags = []
+else:
+    compile_flags = get_compile_flags()
+
 setup(name = "smi_leds",
       version = "2024.8.8.3",
       ext_modules = [Extension("smi_leds",
