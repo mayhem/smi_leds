@@ -9,7 +9,8 @@ project(rpi_smi_leds VERSION 0.1.0
                      LANGUAGES C)
 
 # TODO: Remove test flag
-execute_process(COMMAND python3 ../detect_rpi.py --test
+execute_process(COMMAND python3 ./detect_rpi.py --test
+                WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}   
                 RESULT_VARIABLE return_code
                 OUTPUT_VARIABLE RPI_OPTS)
 if (return_code EQUAL "0")

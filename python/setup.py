@@ -33,8 +33,6 @@ class build_ext(build_ext_orig):
             '-DCMAKE_LIBRARY_OUTPUT_DIRECTORY='+str(extdir.parent.absolute()),
             '-DCMAKE_BUILD_TYPE=' + config,
             '-DBUILD_PYTHON_MODULE=ON',
-            '-DBUILD_FORTRAN_LIBRARY=OFf',
-            '-DBUILD_THE_EXAMPLES=OFF',
         ]
         
         # example of build args
@@ -52,11 +50,11 @@ class build_ext(build_ext_orig):
 
 setup(name = "smi_leds",
       version = "1.0",
-#      ext_modules = [Extension("smi_leds",
-#                               ["module.c", "libsmi_leds.c"],
-#                               libraries=["smi_leds"],
-#                               library_dirs=["/usr/local/lib"])],
       install_requires=[ 'wheel' ],
-      ext_modules=[CMakeExtension('mypythonlibrary/myfortranlibrary')],
-      cmdclass={'build_ext': build_ext,}
+      ext_modules = [Extension("smi_leds"),
+                     Extension("smi_leds",
+                               ["module.c", "libsmi_leds.c"],
+                               libraries=["smi_leds"],
+                               library_dirs=["/usr/local/lib"])],
+      cmdclass={'build_ext': build_ext}
 )
