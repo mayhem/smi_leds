@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 from setuptools import setup, Extension
 from subprocess import check_output
@@ -11,17 +12,29 @@ def get_compile_flags():
         print("Cannot determine RPi version. Is this running on an RPi?")
         sys.exit(-1)
 
-    print(flags)
+    compile_flags = str(flags, "utf-8").split(" ")
+    try:
+        nchans = os.environ["LED_NCHANS"]
+        try:
+            nchans = int(nchans)
+            if nchans not in [8, 16]:
+                raise ValueError
+        except ValueError:
+            print("LED_NCHANS env var must be either 8 or 16.")
+            sys.exit(-1)
+    except KeyError:
+        nchans = 8
 
-    return flags
+    print("Building smi_leds extension for %d channels" % nchans)
+    compile_flags.append("-DNCHANS=%d" % nchans)
 
+    print(compile_flags)
 
-compile_flags = str(get_compile_flags(), "utf-8").split(" ")
-print(compile_flags)
-compile_flags.append("-DLED_NCHANS=8")
+    return compile_flags
 
+compile_flags = get_compile_flags()
 setup(name = "smi_leds",
-      version = "1.0",
+      version = "0.1",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
