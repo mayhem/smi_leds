@@ -6,8 +6,11 @@ from setuptools import setup, Extension
 from subprocess import check_output, CalledProcessError
 
 def get_compile_flags():
+
+    path, _ = os.path.split(__file__)
+    path = os.path.join(path, "..", "detect_rpi.py")
     try:
-        flags = check_output(["../detect_rpi.py"])
+        flags = check_output([path])
     except CalledProcessError:
         print("Cannot determine RPi version. Is this running on an RPi?")
         sys.exit(-1)
@@ -32,7 +35,7 @@ def get_compile_flags():
 
 compile_flags = get_compile_flags()
 setup(name = "smi_leds",
-      version = "2024.08.08.1",
+      version = "2024.8.8.3",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
