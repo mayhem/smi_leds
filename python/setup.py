@@ -34,7 +34,7 @@ def get_compile_flags():
 
 compile_flags = get_compile_flags()
 setup(name = "smi_leds",
-      version = "2024.08.08.0",
+      version = "2024.08.08.1",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
