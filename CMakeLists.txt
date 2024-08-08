@@ -4,7 +4,7 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
-project(rpi_smi_leds VERSION 0.1.0
+project(rpi_smi_leds VERSION 2024.08.08.0
                      DESCRIPTION "Drive 8 or 16 LED strips on an RPI using SMI memory interface"
                      LANGUAGES C)
 
