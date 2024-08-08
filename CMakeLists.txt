@@ -12,7 +12,7 @@ execute_process(COMMAND python3 ../detect_rpi.py
                 RESULT_VARIABLE return_code
                 OUTPUT_VARIABLE RPI_OPTS)
 if (return_code EQUAL "0")
-    message(STATUS RPI_OPTS)
+    message(STATUS ${RPI_OPTS})
 else()
     message(FATAL_ERROR "Could not detect Raspberry Pi version.")
 endif()
