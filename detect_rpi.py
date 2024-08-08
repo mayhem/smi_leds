@@ -37,4 +37,4 @@ if __name__ == "__main__":
     else:
         override = ""
     addr, freq = detect_rpi_version(override)
-    print("-DPHYS_REG_BASE=%s -DCLOCK_HZ=%d" % (addr, freq)) 
+    print("-DPHYS_REG_BASE=%s -DCLOCK_HZ=%d" % (addr, freq), end='') 
