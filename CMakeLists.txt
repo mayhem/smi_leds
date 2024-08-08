@@ -8,6 +8,15 @@ project(rpi_smi_leds VERSION 0.1.0
                      DESCRIPTION "Drive 8 or 16 LED strips on an RPI using SMI memory interface"
                      LANGUAGES C)
 
+execute_process(COMMAND python3 ../detect_rpi.py
+                RESULT_VARIABLE return_code
+                OUTPUT_VARIABLE RPI_OPTS)
+if (return_code EQUAL "0")
+    message(STATUS RPI_OPTS)
+else()
+    message(FATAL_ERROR "Could not detect Raspberry Pi version.")
+endif()
+
 # usage: -DENABLE_16_CHANNELS:BOOL=ON
 option(ENABLE_16_CHANNELS "Enable 16 LED channels. Default: 8 channels" OFF)
 if (ENABLE_16_CHANNELS)
@@ -24,7 +33,7 @@ add_library(smi_leds STATIC smi_led/rpi_dma_utils.c
                             include/smi_leds.h
                             smi_led/rpi_smi_defs.h)
 set_target_properties(smi_leds PROPERTIES PUBLIC_HEADER "include/smi_leds.h")
-target_compile_options(smi_leds PRIVATE ${LED_NCHANS})
+target_compile_options(smi_leds PRIVATE ${LED_NCHANS} "-fPIC" ${RPI_OPTS})
 
 set( BINARY smi_test )
 add_executable( ${BINARY}

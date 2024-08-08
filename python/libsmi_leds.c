@@ -1,7 +1,7 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <stdbool.h>
-#include "rpi_pixleds_lib.h"
+#include "smi_leds.h"
 
 
 PyObject *smi_leds_leds_init(PyObject *self, PyObject *args)
