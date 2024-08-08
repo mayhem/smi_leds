@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
 
     for(int row = 0;; row++)
     {
-//        memset(buffer, 0, sizeof(buffer));
         uint8_t *ptr = buffer;
         for(int led = 0; led < NUM_LEDS; led++)
         {
@@ -31,9 +30,6 @@ int main(int argc, char *argv[])
                 *(ptr++) = 0xFF;
             }
         }
-//        for(int o = 0; o < 24; o++)
-//            printf("%02X ", buffer[o]);
-//        printf("\n");
         leds_set(buffer);
         leds_brightness(row % 101);
         leds_send();

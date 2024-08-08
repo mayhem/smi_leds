@@ -49,7 +49,10 @@
 
 #define TX_TEST         0   // If non-zero, use dummy Tx data
 #define LED_D0_PIN      8   // GPIO pin for D0 output
-#define LED_NCHANS      8   // Number of LED channels (8 or 16)
+
+// Commented out, since this has been made a build time option
+//#define LED_NCHANS      8   // Number of LED channels (8 or 16)
+
 #define LED_NBITS       24  // Number of data bits per LED
 #define LED_PREBITS     4   // Number of zero bits before LED data
 #define LED_POSTBITS    4   // Number of zero bits after LED data
