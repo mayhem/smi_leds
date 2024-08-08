@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import os
+import pathlib
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext as build_ext_orig
 
@@ -16,6 +18,7 @@ class build_ext(build_ext_orig):
 
     def build_cmake(self, ext):
         cwd = pathlib.Path().absolute()
+        cmake_dir = os.path.join(cwd, "..")
 
         # these dirs will be created in build_py, so if you don't have
         # any python sources to bundle, the dirs will be missing
@@ -40,7 +43,7 @@ class build_ext(build_ext_orig):
         ]
         
         os.chdir(str(build_temp))
-        self.spawn(['cmake', str(cwd)] + cmake_args)
+        self.spawn(['cmake', str(cmake_dir)] + cmake_args)
         if not self.dry_run:
             self.spawn(['cmake', '--build', '.'] + build_args)
         # Troubleshooting: if fail on line above then delete all possible 
@@ -53,7 +56,7 @@ setup(name = "smi_leds",
 #                               ["module.c", "libsmi_leds.c"],
 #                               libraries=["smi_leds"],
 #                               library_dirs=["/usr/local/lib"])],
-      install_requires=[ 'wheel' ]
+      install_requires=[ 'wheel' ],
       ext_modules=[CMakeExtension('mypythonlibrary/myfortranlibrary')],
       cmdclass={'build_ext': build_ext,}
 )
