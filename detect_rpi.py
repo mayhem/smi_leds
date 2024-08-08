@@ -26,14 +26,15 @@ def detect_rpi_version(override):
 
     for version_string in VERSION_STRING_MAPPING:
         if id_string.startswith(version_string):
+            sys.stderr.write("detected %s\n" % version_string)
             return VERSION_STRING_MAPPING[version_string]
 
     print("Could not determine rasperry pi version")
     sys.exit(-1)
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1:
-        override = sys.argv[1]
+    if len(sys.argv) > 1 and sys.argv[1] == "--test":
+        override = "Raspberry Pi 3"
     else:
         override = ""
     addr, freq = detect_rpi_version(override)

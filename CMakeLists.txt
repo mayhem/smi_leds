@@ -8,11 +8,12 @@ project(rpi_smi_leds VERSION 0.1.0
                      DESCRIPTION "Drive 8 or 16 LED strips on an RPI using SMI memory interface"
                      LANGUAGES C)
 
-execute_process(COMMAND python3 ../detect_rpi.py
+# TODO: Remove test flag
+execute_process(COMMAND python3 ../detect_rpi.py --test
                 RESULT_VARIABLE return_code
                 OUTPUT_VARIABLE RPI_OPTS)
 if (return_code EQUAL "0")
-    message(STATUS ${RPI_OPTS})
+    message(STATUS "deteced RPI options: ${RPI_OPTS}")
 else()
     message(FATAL_ERROR "Could not detect Raspberry Pi version.")
 endif()
