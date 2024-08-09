@@ -8,7 +8,7 @@ from subprocess import check_output, CalledProcessError
 def get_compile_flags():
 
     path, _ = os.path.split(__file__)
-    path = os.path.join(path, "..", "detect_rpi.py")
+    path = os.path.join(path, "detect_rpi.py")
     try:
         flags = check_output([path])
     except CalledProcessError:
@@ -41,12 +41,12 @@ else:
 setup(name = "smi_leds",
       version = "2024.8.9.4",
       ext_modules = [Extension("smi_leds",
-                               ["module.c",
-                               "libsmi_leds.c",
-                               "../smi_leds/rpi_dma_utils.c",
-                               "../smi_leds/rpi_pixleds_lib.c"],
+                               ["python/module.c",
+                               "python/libsmi_leds.c",
+                               "smi_leds/rpi_dma_utils.c",
+                               "smi_leds/rpi_pixleds_lib.c"],
                                extra_compile_args=compile_flags,
-                               include_dirs=["../include"])],
+                               include_dirs=["include"])],
       install_requires=[ 'wheel' ],
       author="Jeremy P Bentham, Robert Kaye",
       classifiers=[
