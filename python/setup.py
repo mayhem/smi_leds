@@ -38,9 +38,6 @@ if sys.argv[1] == "sdist":
 else:
     compile_flags = get_compile_flags()
 
-with open('../README.md') as f:
-    long_description = f.read()
-
 setup(name = "smi_leds",
       version = "2024.8.9.0",
       ext_modules = [Extension("smi_leds",
@@ -59,7 +56,8 @@ setup(name = "smi_leds",
           "Operating System :: POSIX :: Linux"
       ],
       description="A Python3 extension to drive 8 or 16 WS2812 LED Strips with a single Raspberry Pi",
-      long_description=long_description,
-      long_description_content_type='text/markdown',
+      long_description="Using the SMI memory programming interface it is possible to drive 8 or 16 WS2812 LED strips " +
+                       "glitch-free with a single Raspberry Pi. All models of Raspberry Pis should work with this module. " +
+                       "Full documentation and writing instructions are available on the GitHub project page.",
       url="https://github.com/mayhem/smi_leds",
 )
