@@ -27,12 +27,12 @@ else()
 endif()
 
 include_directories( include )
-add_library(smi_leds STATIC smi_led/rpi_dma_utils.c
-                            smi_led/rpi_dma_utils.h
-                            smi_led/rpi_pixleds.c
-                            smi_led/rpi_pixleds_lib.c
-                            include/smi_leds.h
-                            smi_led/rpi_smi_defs.h)
+add_library(smi_leds STATIC smi_leds/rpi_dma_utils.c
+                            smi_leds/rpi_dma_utils.h
+                            smi_leds/rpi_pixleds.c
+                            smi_leds/rpi_pixleds_lib.c
+                            smi_leds/rpi_smi_defs.h
+                            include/smi_leds.h)
 set_target_properties(smi_leds PROPERTIES PUBLIC_HEADER "include/smi_leds.h")
 separate_arguments(RPI_OPTS UNIX_COMMAND "${RPI_OPTS}")
 target_compile_options(smi_leds PRIVATE ${LED_NCHANS} ${RPI_OPTS} -fPIC)

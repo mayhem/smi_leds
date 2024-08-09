@@ -29,7 +29,7 @@ def get_compile_flags():
         nchans = 8
 
     print("Building smi_leds extension for %d channels" % nchans)
-    compile_flags.append("-DNCHANS=%d" % nchans)
+    compile_flags.append("-DLED_NCHANS=%d" % nchans)
 
     return compile_flags
 
@@ -43,8 +43,8 @@ setup(name = "smi_leds",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
-                               "../smi_led/rpi_dma_utils.c",
-                               "../smi_led/rpi_pixleds_lib.c"],
+                               "../smi_leds/rpi_dma_utils.c",
+                               "../smi_leds/rpi_pixleds_lib.c"],
                                extra_compile_args=compile_flags,
                                include_dirs=["../include"])],
       install_requires=[ 'wheel' ],
