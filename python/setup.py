@@ -39,7 +39,7 @@ else:
     compile_flags = get_compile_flags()
 
 setup(name = "smi_leds",
-      version = "2024.8.9.3",
+      version = "2024.8.9.4",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
