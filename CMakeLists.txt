@@ -4,12 +4,11 @@ if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
 endif()
 
-project(rpi_smi_leds VERSION 2024.08.08.0
+project(rpi_smi_leds VERSION 2024.8.9.0
                      DESCRIPTION "Drive 8 or 16 LED strips on an RPI using SMI memory interface"
                      LANGUAGES C)
 
-# TODO: Remove test flag
-execute_process(COMMAND python3 ./detect_rpi.py --test
+execute_process(COMMAND python3 ./detect_rpi.py
                 WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}   
                 RESULT_VARIABLE return_code
                 OUTPUT_VARIABLE RPI_OPTS)

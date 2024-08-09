@@ -38,8 +38,11 @@ if sys.argv[1] == "sdist":
 else:
     compile_flags = get_compile_flags()
 
+with open('../README.md') as f:
+    long_description = f.read()
+
 setup(name = "smi_leds",
-      version = "2024.8.8.3",
+      version = "2024.8.9.0",
       ext_modules = [Extension("smi_leds",
                                ["module.c",
                                "libsmi_leds.c",
@@ -47,5 +50,16 @@ setup(name = "smi_leds",
                                "../smi_led/rpi_pixleds_lib.c"],
                                extra_compile_args=compile_flags,
                                include_dirs=["../include"])],
-      install_requires=[ 'wheel' ]
+      install_requires=[ 'wheel' ],
+      author="Jeremy P Bentham, Robert Kaye",
+      classifiers=[
+          "Programming Language :: Python :: 3",
+          "Development Status :: 4 - Beta",
+          "License :: OSI Approved :: Apache Software License",
+          "Operating System :: POSIX :: Linux"
+      ],
+      description="A Python3 extension to drive 8 or 16 WS2812 LED Strips with a single Raspberry Pi",
+      long_description=long_description,
+      long_description_content_type='text/markdown',
+      url="https://github.com/mayhem/smi_leds",
 )
