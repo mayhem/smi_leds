@@ -4,19 +4,17 @@
 #include <stdbool.h>
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C"
+{
+#endif
+
 typedef struct {
     uint8_t b;
     uint8_t r;
     uint8_t g;
     uint8_t a;
 } color_t;
-
-
-#ifdef __cplusplus
-extern "C"
-{
-#endif
-
 
 bool leds_init(int init_led_count, uint8_t brightness); // 0 - 100 brightness
 void leds_brightness(uint8_t brightness); // 0 - 100

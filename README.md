@@ -80,11 +80,13 @@ To install this library, you'll need to have the following packages installed:
 * python-dev-is-python3: Python dev headers, formerly python3-dev
 * cmake
 
+On a recent RPi install, this line should work:
+
 ```
 sudo apt install -y build-essential python-dev-is-python3 cmake
 ```
 
-## C/C++ static library
+## Install the C/C++ static library
 
 ## Prerequisites
 
@@ -127,7 +129,7 @@ To build your own code, run:
 gcc -I /usr/local/include -L /usr/local/lib my_test.c -lsmi_leds
 ```
 
-## Python 
+## Install Python 3 module
 
 ## Prerequisites
 
