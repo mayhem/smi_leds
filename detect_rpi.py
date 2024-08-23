@@ -4,8 +4,9 @@ import sys
 
 # TODO: Find RPI 5 and add to this table
 VERSION_STRING_MAPPING = {
-    "Raspberry Pi Zero":   ("0x20000000", 400000000),
+    # longest strings should go first!
     "Raspberry Pi Zero 2": ("0x3F000000", 400000000),
+    "Raspberry Pi Zero":   ("0x20000000", 400000000),
     "Raspberry Pi 1":      ("0x20000000", 400000000),
     "Raspberry Pi 2":      ("0x3F000000", 250000000),
     "Raspberry Pi 3":      ("0x3F000000", 250000000),
