@@ -42,6 +42,8 @@ add_executable( ${BINARY}
                 examples/example.c ) 
 
 target_link_libraries( ${BINARY}
+                       PUBLIC
+                       m
                        PRIVATE
                        smi_leds )
 

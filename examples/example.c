@@ -6,7 +6,7 @@
 
 #include "smi_leds.h"
 
-#define NUM_LEDS 8
+#define NUM_LEDS 144
 #define NUM_STRIPS 8
 
 void hsv_to_rgb(float h, float s, float v, float *r, float *g, float *b) 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         ptr = buffer;
         for(int strip = 0; strip < NUM_STRIPS; strip++)
         {
-            float hue = fmod(t + (strip * .001), 1.0);
+            float hue = fmod(t + (strip * .01), 1.0);
             float r, g, b;
 
             hsv_to_rgb(hue, 1.0, 1.0, &r, &g, &b);
@@ -61,5 +61,8 @@ int main(int argc, char *argv[])
 
         // Actually send them to the LEDs:
         leds_send();
+
+        // Sleep for a while
+        usleep(50000);
     }
 }
