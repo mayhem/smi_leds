@@ -7,7 +7,7 @@ from time import sleep
 import smi_leds
 
 # Define the number of LEDs and led strips
-num_leds = 25
+num_leds = 30
 num_strips = 8
 
 # init the smi module with an initial brightness of 50%
