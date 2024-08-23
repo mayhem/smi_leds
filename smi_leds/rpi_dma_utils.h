@@ -22,8 +22,9 @@
 #define PI_23_REG_BASE  0x3F000000  // Pi 2 or 3
 #define PI_4_REG_BASE   0xFE000000  // Pi 4
 
+// commented out, since defined by CMake now
 //#define CLOCK_HZ      400000000   // Pi Zero
-#define CLOCK_HZ        250000000   // Pi 2 - 4
+//#define CLOCK_HZ        250000000   // Pi 2 - 4
 
 //#define POINTER_TYPE  uint32_t    // 32-bit
 #define POINTER_TYPE    size_t	    // 64-bit

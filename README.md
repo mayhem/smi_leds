@@ -33,7 +33,52 @@ make it work.
 
 # Installation
 
+## Raspberry Pi Setup
+
+In order for the smi_leds to work, the i2s system that is used to provide audio
+on the RPi must be disabled. The easiest way to do this is to edit 
+/boot/firmware/config.txt (previously used to be /boot/config.txt) and
+to change the line:
+
+```
+#dtparam=i2s=on
+```
+
+to
+
+```
+dtparam=i2s=off
+
+```
+
+Don't forget to uncomment the line. Once you've made this change, reboot your
+RPi.
+
+## Prerequisites
+
+To install this library, you'll need to have the following packages installed:
+
+* python-dev-is-python3: Python dev headers, formerly python3-dev
+* cmake
+
+```
+sudo apt install -y build-essential python-dev-is-python3 cmake
+```
+
 ## C/C++ static library
+
+## Prerequisites
+
+To install this library, you'll need to have the following packages installed:
+
+* cmake
+* build-essential
+
+```
+apt install -y build-essential cmake
+```
+
+## Installation
 
 To install smi_leds for 8 LED strands:
 
@@ -64,6 +109,20 @@ gcc -I /usr/local/include -L /usr/local/lib my_test.c -lsmi_leds
 ```
 
 ## Python 
+
+## Prerequisites
+
+To install this library, you'll need to have the following packages installed:
+
+* python-dev-is-python3: Python dev headers, formerly python3-dev
+* cmake
+* build-essential
+
+```
+sudo apt install -y build-essential python-dev-is-python3 cmake
+```
+
+## Installation
 
 To install via pip for 8 LED strands:
 
