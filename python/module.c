@@ -1,6 +1,6 @@
 #include "libsmi_leds.h"
 
-char smi_leds_docs[] = "Moar leds!";
+char smi_leds_docs[] = "Drive up to 8 or 16 LED strips with one RPi.";
 
 PyMethodDef smi_leds_funcs[] = 
 {
