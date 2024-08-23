@@ -249,3 +249,9 @@ while True:
 
 sleep(1)
 ```
+
+# Demo video
+
+Here is a super short demonstration video for this module in action:
+
+[![smi_leds demo video](https://img.youtube.com/vi/Yu0YikcP2a4/0.jpg)](https://www.youtube.com/watch?v=Yu0YikcP2a4)
