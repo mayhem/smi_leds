@@ -58,7 +58,7 @@ void *map_uncached_mem(MEM_MAP *mp, int size)
         (mp->bus = lock_vc_mem(mp->fd, mp->h)) != 0 &&
         (mp->virt = map_segment(BUS_PHYS_ADDR(mp->bus), mp->size)) != 0
         ? mp->virt : 0;
-    printf("VC mem handle %u, phys %p, virt %p\n", mp->h, mp->bus, mp->virt);
+    //printf("VC mem handle %u, phys %p, virt %p\n", mp->h, mp->bus, mp->virt);
     return(ret);
 }
 

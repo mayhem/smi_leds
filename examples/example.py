@@ -16,8 +16,7 @@ def set_led(leds, strip, index, color):
     leds[offset + 2] = color[0]
 
 
-smi_leds.leds_init(num_leds, 25)
-smi_leds.leds_brightness(100)
+smi_leds.leds_init(num_leds, 50)
 smi_leds.leds_clear()
 
 leds = bytearray((0,) * num_leds * num_strips * 4)

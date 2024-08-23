@@ -26,6 +26,7 @@
 #endif
 
 #define LED_D0_PIN      8   // GPIO pin for D0 output
+// Now defined via CMake
 //#define LED_NCHANS      8   // Number of LED channels (8 or 16)
 #define LED_NBITS       24  // Number of data bits per LED
 #define LED_PREBITS     4   // Number of zero bits before LED data
@@ -199,9 +200,8 @@ bool leds_init(int init_led_count, uint8_t brightness_arg)
 
     leds_clear();
 
-
-    printf("smileds: Setting %u LED%s per channel, %u channels\n",
-           led_count, led_count == 1 ? "" : "s", LED_NCHANS);
+    //printf("smileds: Setting %u LED%s per channel, %u channels\n",
+    //       led_count, led_count == 1 ? "" : "s", LED_NCHANS);
 
     return true;
 }
@@ -212,12 +212,9 @@ void leds_brightness(uint8_t brightness_arg)
 }
 
 //set rgb values for a specific channel and pixel
+// NOTE: Very likely buggy
 void leds_set_pixel(uint8_t  channel, uint16_t  pixel,  color_t color)
 {
-
-//    printf("smileds: set pixel %d %d %d\n", channel, pixel, rgb);
-//    printf("is %d\n", LED_TX_OSET(pixel));
-
     if (pixel>=led_count)
         return;
 

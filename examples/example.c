@@ -6,7 +6,7 @@
 
 #include "smi_leds.h"
 
-#define NUM_LEDS 144
+#define NUM_LEDS 30
 #define NUM_STRIPS 8
 
 void hsv_to_rgb(float h, float s, float v, float *r, float *g, float *b) 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 
     // TODO: Check the num leds setting
     // initialize the smi_leds module, starting with a 25% brightness
-    leds_init(NUM_LEDS, 25);
+    leds_init(NUM_LEDS, 50);
 
     for(float t = 0.0;; t += .01)
     {
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
         ptr = buffer;
         for(int strip = 0; strip < NUM_STRIPS; strip++)
         {
-            float hue = fmod(t + (strip * .01), 1.0);
+            float hue = fmod(t + (strip * .04), 1.0);
             float r, g, b;
 
             hsv_to_rgb(hue, 1.0, 1.0, &r, &g, &b);
