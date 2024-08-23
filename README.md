@@ -31,6 +31,25 @@ There is some code in the driver for setting indiviual pixels, but it wasn't wor
 so I've not exposed that function. But if people want that, someone should be able to
 make it work.
 
+## RGB data structure
+
+For this setup, it is assumed that you have 8 or 16 equally sized LED strips.
+
+Each time you call led_set, MUST send the same number of bytes:
+
+* 8 * num_leds * num_strips * 3 bytes for an 8 strip setup
+* 16 * num_leds * num_strips * 3 bytes for a 16 strip setup
+
+If you have LED strips with differing lengths, set num_leds to the length of your
+longest LED strip. Then, for all strips that are shorter than the maximum length
+pad the RGB with zeros, so that you're always sending the same number of bytes
+for each of your strips. The extra zeros will be ignored by the shorter strips.
+
+If you have fewer than 8 or 16 LED strips: Pad the RGB data sent to the strips
+out to 8 (or 16) strips. If you have 4 strips, send 4 strips of data and then
+4 strips of zeros for a 8 strip setup.
+
+
 # Installation
 
 ## Raspberry Pi Setup
