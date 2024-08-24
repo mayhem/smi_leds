@@ -1,1 +1,3 @@
 include include/smi_leds.h
+include python/*.h
+include smi_leds/*.h
