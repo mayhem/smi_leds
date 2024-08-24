@@ -8,6 +8,8 @@ from subprocess import check_output, CalledProcessError
 def get_compile_flags():
 
     path, _ = os.path.split(__file__)
+    files = os.listdir(path)
+    print(files)
     path = os.path.join(path, "detect_rpi.py")
     print("trying to find detect_rpi at %s" % path)
     try:
@@ -40,7 +42,7 @@ else:
     compile_flags = get_compile_flags()
 
 setup(name = "smi_leds",
-      version = "2024.8.24.1",
+      version = "2024.8.24.2",
       ext_modules = [Extension("smi_leds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
