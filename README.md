@@ -178,76 +178,40 @@ SD0 through SD17 are the GPIOs that will drive your LED strips.
 
 ## C
 
-The full example in examples/example.c. This simple function sets all the LEDs to
-red at 25% brightness and exits:
+The full example in examples/example.c. This fragment sets all the LEDs to
+white at 25% brightness:
 
 ```
-int main(int argc, char *argv[])
-{
-    bool    ret;
+    // Allocate a buffer, set it to all 0xFF (white)
     uint8_t buffer[NUM_LEDS * NUM_STRIPS * 3];
-    uint8_t *ptr = buffer;
-    
-    // TODO: Check the num leds setting
+    memset(buffer, 0xFF, NUM_LEDS * NUM_STRIPS * 3);
+
     // initialize the smi_leds module, starting with a 25% brightness
-    leds_init(NUM_LEDS, 25);                   
+    leds_init(NUM_LEDS, 25);
     
-    // Manually and slowly build the color buffer. 3 bytes per pixel (RGB) 
-    // for NUM_LEDS pixels and NUM_STRIPS strips
-    for(int led = 0; led < NUM_LEDS; led++)
-    {                                                      
-        for(int strip = 0; strip < NUM_STRIPS; strip++)
-        {                       
-            *(ptr++) = 0x00;    
-            *(ptr++) = 0x00;    
-            *(ptr++) = 0xFF;
-        }             
-    }
-    
-    // Send the buffer to the SMI buffer
-    leds_set(buffer);    
-    
-    // Actually send them to the LEDs:
-    leds_send();    
-}
+    // Transfer our local buffer to the SMI buffer
+    leds_set(buffer);
+
+    // Shift the SMI buffer out to the LEDs
+    leds_send();
 ```
 
 ## Python 3
 
-TODO: Improve the python version and have it match the C version. Explain below:
+The python version is quite similar:
 
 ```
-import smi_leds
-
-num_leds = 144 
-num_strips = 8
-total_leds = num_leds * num_strips
-total_bytes = total_leds * 4
-
-def set_led(leds, strip, index, color):
-    offset = (strip * num_leds + index) * 4;
-    leds[offset] = color[2]
-    leds[offset + 1] = color[1]
-    leds[offset + 2] = color[0]
-
-smi_leds.leds_init(num_leds, 25)
-
-leds = bytearray((0,) * num_leds * num_strips * 4)
-row = 0
-while True:
+    # Build the LED data array
+    leds = bytearray()
     for strip in range(num_strips):
         for led in range(num_leds):
-            if led // 4 % 2 == row % 2:
-                color = ( 16, 0, 0 )
-            else:
-                color = ( 0, 0, 16 )
-            set_led(leds, strip, led, color)
+            leds += bytearray((255, 255, 255))
 
+    # Set the buffer into to the smi_leds module
     smi_leds.leds_set(leds)
-    smi_leds.leds_send()
-    row += 1
 
-sleep(1)
+    # Shift them out to the strips
+    smi_leds.leds_send()
 ```
 
 # Demo video
@@ -255,3 +219,14 @@ sleep(1)
 Here is a super short demonstration video for this module in action:
 
 [![smi_leds demo video](https://img.youtube.com/vi/Yu0YikcP2a4/0.jpg)](https://www.youtube.com/watch?v=Yu0YikcP2a4)
+
+# Future work
+
+This module could use various improvements over time if people are interesting in developing it further:
+
+* Test more PRi models (RPi 5, in particular)
+* Consider adding gamma correction
+* Debug the set_pixel() function to allow changing single pixels
+
+Also, if someone else would like to take over the development of this module, I would be
+happy to pass it on.

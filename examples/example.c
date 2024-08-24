@@ -33,9 +33,8 @@ int main(int argc, char *argv[])
     uint8_t buffer[NUM_LEDS * NUM_STRIPS * 3];
     uint8_t *ptr;
 
-    // TODO: Check the num leds setting
     // initialize the smi_leds module, starting with a 25% brightness
-    leds_init(NUM_LEDS, 50);
+    leds_init(NUM_LEDS, 25);
 
     for(float t = 0.0;; t += .01)
     {

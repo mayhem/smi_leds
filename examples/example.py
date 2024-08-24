@@ -10,8 +10,8 @@ import smi_leds
 num_leds = 30
 num_strips = 8
 
-# init the smi module with an initial brightness of 50%
-smi_leds.leds_init(num_leds, 50)
+# init the smi module with an initial brightness of 25%
+smi_leds.leds_init(num_leds, 25)
 smi_leds.leds_clear()
 
 row = 0
