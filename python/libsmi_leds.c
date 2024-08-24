@@ -1,7 +1,7 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <stdbool.h>
-#include "smileds.h"
+#include "smi_leds.h"
 
 
 PyObject *smileds_leds_init(PyObject *self, PyObject *args)

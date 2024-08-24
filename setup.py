@@ -44,7 +44,7 @@ with open(readme, "r") as f:
     long_description=f.read()
 
 setup(name = "smileds",
-      version = "2024.8.25.1",
+      version = "2024.8.25.2",
       ext_modules = [Extension("smileds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
