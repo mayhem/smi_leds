@@ -1,56 +1,56 @@
 #include "libsmi_leds.h"
 
-char smi_leds_docs[] = "Drive up to 8 or 16 LED strips with one RPi.";
+char smileds_docs[] = "Drive up to 8 or 16 LED strips with one RPi.";
 
-PyMethodDef smi_leds_funcs[] = 
+PyMethodDef smileds_funcs[] = 
 {
 	{
         "leds_init",
-		(PyCFunction)smi_leds_leds_init,
+		(PyCFunction)smileds_leds_init,
 		METH_VARARGS,
-		smi_leds_docs
+		smileds_docs
     },
 	{
         "leds_brightness",
-		(PyCFunction)smi_leds_leds_brightness,
+		(PyCFunction)smileds_leds_brightness,
 		METH_VARARGS,
-		smi_leds_docs
+		smileds_docs
     },
 	{
         "leds_clear",
-		(PyCFunction)smi_leds_leds_clear,
+		(PyCFunction)smileds_leds_clear,
 		METH_NOARGS,
-		smi_leds_docs
+		smileds_docs
     },
 	{
         "leds_set",
-		(PyCFunction)smi_leds_leds_set,
+		(PyCFunction)smileds_leds_set,
 		METH_VARARGS,
-		smi_leds_docs
+		smileds_docs
     },
 	{
         "leds_send",
-		(PyCFunction)smi_leds_leds_send,
+		(PyCFunction)smileds_leds_send,
 		METH_NOARGS,
-		smi_leds_docs
+		smileds_docs
     },
     { NULL}
 };
 
-char smi_leds_mod_docs[] = "The SMI LEDs module.";
+char smileds_mod_docs[] = "The SMI LEDs module.";
 
-PyModuleDef smi_leds_mod = {
+PyModuleDef smileds_mod = {
 	PyModuleDef_HEAD_INIT,
-	"smi_leds",
-	smi_leds_mod_docs,
+	"smileds",
+	smileds_mod_docs,
 	-1,
-	smi_leds_funcs,
+	smileds_funcs,
 	NULL,
 	NULL,
 	NULL,
 	NULL
 };
 
-PyMODINIT_FUNC PyInit_smi_leds(void) {
-	return PyModule_Create(&smi_leds_mod);
+PyMODINIT_FUNC PyInit_smileds(void) {
+	return PyModule_Create(&smileds_mod);
 }

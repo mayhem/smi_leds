@@ -1,10 +1,10 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 #include <stdbool.h>
-#include "smi_leds.h"
+#include "smileds.h"
 
 
-PyObject *smi_leds_leds_init(PyObject *self, PyObject *args)
+PyObject *smileds_leds_init(PyObject *self, PyObject *args)
 {
     int num_leds;
     int brightness;
@@ -17,7 +17,7 @@ PyObject *smi_leds_leds_init(PyObject *self, PyObject *args)
     return PyBool_FromLong(ret);
 }
 
-PyObject *smi_leds_leds_brightness(PyObject *self, PyObject *args)
+PyObject *smileds_leds_brightness(PyObject *self, PyObject *args)
 {
     int brightness;
 
@@ -28,13 +28,13 @@ PyObject *smi_leds_leds_brightness(PyObject *self, PyObject *args)
     Py_RETURN_NONE;   
 }
 
-PyObject *smi_leds_leds_clear(PyObject *self, PyObject *args)
+PyObject *smileds_leds_clear(PyObject *self, PyObject *args)
 {
     leds_clear();
     Py_RETURN_NONE;   
 }
 
-PyObject *smi_leds_leds_set(PyObject *self, PyObject *args)
+PyObject *smileds_leds_set(PyObject *self, PyObject *args)
 {
     Py_buffer buffer;
 
@@ -47,7 +47,7 @@ PyObject *smi_leds_leds_set(PyObject *self, PyObject *args)
     Py_RETURN_NONE;   
 }
 
-PyObject *smi_leds_leds_send(PyObject *self, PyObject *args)
+PyObject *smileds_leds_send(PyObject *self, PyObject *args)
 {
     leds_send();
     Py_RETURN_NONE;   
