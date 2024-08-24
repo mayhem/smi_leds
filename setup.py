@@ -40,7 +40,7 @@ else:
     compile_flags = get_compile_flags()
 
 setup(name = "smi_leds",
-      version = "2024.8.24.0",
+      version = "2024.8.24.1",
       ext_modules = [Extension("smi_leds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
