@@ -39,7 +39,7 @@ else:
     compile_flags = get_compile_flags()
 
 setup(name = "smi_leds",
-      version = "2024.8.24.3",
+      version = "2024.8.24.4",
       ext_modules = [Extension("smi_leds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
@@ -48,8 +48,7 @@ setup(name = "smi_leds",
                                extra_compile_args=compile_flags,
                                include_dirs=["include"])],
       install_requires=[ "wheel" ],
-      package_data={"": ["detect_rpi.py"]},
-      include_package_data=True,
+      py_modules=["detect_rpi"],
       author="Jeremy P Bentham, Robert Kaye",
       classifiers=[
           "Programming Language :: Python :: 3",
