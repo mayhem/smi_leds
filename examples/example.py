@@ -11,8 +11,8 @@ num_leds = 30
 num_strips = 8
 
 # init the smi module with an initial brightness of 25%
-smi_leds.leds_init(num_leds, 25)
-smi_leds.leds_clear()
+smileds.leds_init(num_leds, 25)
+smileds.leds_clear()
 
 row = 0
 t = 0.0
@@ -26,11 +26,11 @@ while True:
             r, g, b = hsv_to_rgb(hue, 1.0, 1.0)
             leds += bytearray(((int(r * 255), int(g * 255), int(b * 255))))
 
-    # Set the buffer into to the smi_leds module
-    smi_leds.leds_set(leds)
+    # Set the buffer into to the smileds module
+    smileds.leds_set(leds)
 
     # Shift them out to the strips
-    smi_leds.leds_send()
+    smileds.leds_send()
     t += .01
     sleep(.05)
 
