@@ -9,6 +9,7 @@ def get_compile_flags():
 
     path, _ = os.path.split(__file__)
     path = os.path.join(path, "detect_rpi.py")
+    print("trying to find detect_rpi at %s" % path)
     try:
         flags = check_output([path])
     except CalledProcessError:
