@@ -1,4 +1,4 @@
-# smi_leds
+# SMI LEDs
 
 This project allows you to drive 8 or 16 WS2812 LED strips with one single Raspberry Pi!
 

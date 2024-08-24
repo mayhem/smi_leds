@@ -44,17 +44,18 @@ with open(readme, "r") as f:
     long_description=f.read()
 
 setup(name = "smileds",
-      version = "2024.8.24.5",
+      version = "2024.8.24.6",
       ext_modules = [Extension("smi_leds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
                                "smi_leds/rpi_dma_utils.c",
-                               "smi_leds/rpi_pixleds_lib.c",
-                               "include/smi_leds.h"],
+                               "smi_leds/rpi_pixleds_lib.c"],
                                extra_compile_args=compile_flags,
                                include_dirs=["include"])],
       install_requires=[ "wheel" ],
       py_modules=["detect_rpi"],
+      package_dir={"": "include"},
+      include_package_data=True,
       author="Jeremy P Bentham, Robert Kaye",
       classifiers=[
           "Programming Language :: Python :: 3",
