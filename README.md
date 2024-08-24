@@ -148,14 +148,14 @@ sudo apt install -y build-essential python-dev-is-python3 cmake
 To install via pip for 8 LED strands:
 
 ```
-pip install smi-leds
+pip install smileds
 ```
 
 To install via pip for 16 LED strands:
 
 ```
 export LED_NCHANS=16
-pip install smi-leds
+pip install smileds
 ```
 
 # Hardware Setup

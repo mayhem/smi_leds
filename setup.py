@@ -38,13 +38,14 @@ if sys.argv[1] == "sdist":
 else:
     compile_flags = get_compile_flags()
 
-setup(name = "smi_leds",
-      version = "2024.8.24.4",
+setup(name = "smileds",
+      version = "2024.8.24.5",
       ext_modules = [Extension("smi_leds",
                                ["python/module.c",
                                "python/libsmi_leds.c",
                                "smi_leds/rpi_dma_utils.c",
-                               "smi_leds/rpi_pixleds_lib.c"],
+                               "smi_leds/rpi_pixleds_lib.c",
+                               "include/smi_leds.h"],
                                extra_compile_args=compile_flags,
                                include_dirs=["include"])],
       install_requires=[ "wheel" ],
