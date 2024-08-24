@@ -201,17 +201,20 @@ white at 25% brightness:
 The python version is quite similar:
 
 ```
+    # initialize the smi_leds module, starting with a 25% brightness
+    smileds.leds_init(num_leds, 25)
+
     # Build the LED data array
     leds = bytearray()
     for strip in range(num_strips):
         for led in range(num_leds):
             leds += bytearray((255, 255, 255))
 
-    # Set the buffer into to the smi_leds module
-    smi_leds.leds_set(leds)
+    # Set the buffer into to the smileds module
+    smileds.leds_set(leds)
 
     # Shift them out to the strips
-    smi_leds.leds_send()
+    smileds.leds_send()
 ```
 
 # Demo video
