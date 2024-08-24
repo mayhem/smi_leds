@@ -4,7 +4,7 @@ from colorsys import hsv_to_rgb
 from math import fmod
 from time import sleep
 
-import smi_leds
+import smileds
 
 # Define the number of LEDs and led strips
 num_leds = 30
