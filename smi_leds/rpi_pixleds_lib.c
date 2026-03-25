@@ -305,9 +305,20 @@ void leds_send()
     swap_bytes(tx_buffer, TX_BUFF_SIZE(led_count));
 #endif
     //NOTE: due to caching its more efficient to use a memcpy instead of direct buffer manipulation.
+    //SECOND NOTE: the upper note only applies to 32 bit systems. On 64 bit systems, memcpy will
+    //             fail due to different memory mapping and needs to use direct buffer manipulation instead.
+    //             The current implementation is probably not the most efficient and will probably need to
+    //             be improved later.
+#ifndef __aarch64__
     memcpy(txdata, tx_buffer, TX_BUFF_SIZE(led_count));
+#else
+    for (int i=0; i<TX_BUFF_LEN(led_count); i++)
+    {
+	txdata[i] = tx_buffer[i];
+    }
+#endif
     start_smi(&vc_mem);
-    usleep(2850);
+    usleep(10);
 }
 
 void leds_set(uint8_t *buffer)

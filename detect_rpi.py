@@ -5,13 +5,14 @@ import sys
 # TODO: Identify an RPI 5 and throw an error
 VERSION_STRING_MAPPING = {
     # longest strings should go first!
-    "Raspberry Pi Model A Plus": ("0x20000000", 400000000),
-    "Raspberry Pi Zero 2":       ("0x3F000000", 400000000),
-    "Raspberry Pi Zero":         ("0x20000000", 400000000),
-    "Raspberry Pi 1":            ("0x20000000", 400000000),
-    "Raspberry Pi 2":            ("0x3F000000", 250000000),
-    "Raspberry Pi 3":            ("0x3F000000", 250000000),
-    "Raspberry Pi 4":            ("0xFE000000", 250000000),
+    "Raspberry Pi Compute Module 4":    ("0xFE000000", 250000000),
+    "Raspberry Pi Model A Plus":        ("0x20000000", 400000000),
+    "Raspberry Pi Zero 2":              ("0x3F000000", 400000000),
+    "Raspberry Pi Zero":                ("0x20000000", 400000000),
+    "Raspberry Pi 1":                   ("0x20000000", 400000000),
+    "Raspberry Pi 2":                   ("0x3F000000", 250000000),
+    "Raspberry Pi 3":                   ("0x3F000000", 250000000),
+    "Raspberry Pi 4":                   ("0xFE000000", 250000000),
 }
 
 def detect_rpi_version(override):

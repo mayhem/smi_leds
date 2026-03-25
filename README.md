@@ -1,3 +1,5 @@
+In memory of Robert Kaye, creator of `smi_leds`, founder of the MetaBrainz foundation, and much more.
+
 # SMI LEDs
 
 This project allows you to drive 8 or 16 WS2812 LED strips with one single Raspberry Pi!
@@ -56,8 +58,8 @@ out to 8 (or 16) strips. If you have 4 strips, send 4 strips of data and then
 
 ## OS Choice
 
-Currently this code only works on a 32 bit Raspberry Pi OS images. 64 bit images are
-currently not supported, but I'll see about getting those working as well.
+This project is built and tested for Raspberry Pi OS distributions. Both 32-bit and 64-bit 
+versions are supported. The project may work but is not tested on other Linux distributions.
 
 ## Raspberry Pi Setup
 
@@ -254,5 +256,4 @@ This module could use various improvements over time if people are interesting i
 * Consider adding gamma correction
 * Debug the set_pixel() function to allow changing single pixels
 
-Also, if someone else would like to take over the development of this module, I would be
-happy to pass it on.
+There are also lots of functions that are not optimized. Feel free to commit if you'd like to improve something!
